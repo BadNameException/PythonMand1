@@ -1,33 +1,32 @@
 password_list = {"chris": "helloworld", "john": "passw1", "nelly": "2hell1", "wendy": "1Passw"}
 
 
-def pwfinder(pwlist):
+def pwfinder(pwlist, length):
+
+    global has_upper
 
     for value in pwlist.values():
+        print(value)
+        # Check if the password has length-parameter amounts of characters.
+        if len(value) == length:
 
-        print(len(value))
-        if not len(value) == 6:
 
-            password_array = [password_list[value]]
+            password_array = list(value)
 
             # Check if the first character is a digit.
             if password_array[0].isdigit():
-                for index, character in enumerate(password_array, start=1):
+                #for index, character in enumerate(password_array, start=1):
+                for character in password_array:
                     print(character)
                     if character.isupper():
                         has_upper = True
                         break
-                    else:
-                        # Print out a message showing the program came to this point.
-                        # This could be bad practice in a real program as it would print
-                        # out all the password not matching the criteria.
-                        print("The password \" {} \" has no uppercast letters".format())
 
-            if has_upper is True:
-                print("The password " + value + " matches your criteria!")
-                has_upper = False
+                if has_upper is True:
+                    print("The password " + value + " matches your criteria!")
+                    has_upper = False
         else:
-            print("Password does not have {} characters")
+            print("The password \"{}\" does not have {} characters.".format(value, length))
 
 
-pwfinder(password_list)
+pwfinder(password_list, 6)
